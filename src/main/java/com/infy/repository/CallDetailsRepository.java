@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CallDetailsRepository extends JpaRepository<CallDetails,Long> {
-    List<CallDetails> findByCalledById(long calledBy);
+    List<CallDetails> findByCalledBy(long calledBy);
 }

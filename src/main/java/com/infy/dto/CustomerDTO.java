@@ -1,5 +1,4 @@
 package com.infy.dto;
-
 import com.infy.entity.Customer;
 import com.infy.entity.Plan;
 
@@ -94,7 +93,9 @@ public class CustomerDTO {
     //Convert dto to entity
     public Customer customerDtoToEntity(CustomerDTO customerDTO){
         Customer customer = new Customer();
+        customer.setPhoneNo(customerDTO.getPhoneNo());
         customer.setName(customerDTO.getName());
+        customer.setPassword(customerDTO.getPassword());
         customer.setAge(customerDTO.getAge());
         customer.setAddress(customerDTO.getAddress());
         customer.setGender(customerDTO.getGender());

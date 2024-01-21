@@ -21,7 +21,7 @@ public class Customer {
     @Column(nullable = false,length = 1)
     private char gender;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
