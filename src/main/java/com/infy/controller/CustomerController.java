@@ -34,6 +34,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{phoneNo}")
+    // to get the data of customer
     public CustomerDTO getCustomerProfile(@PathVariable("phoneNo") @Pattern(regexp = "[0-9]{10}",
             message="{customer.phoneNo.invalid}")  String phoneNo) throws NoSuchCustomerException {
         return (CustomerDTO) customerService.getCustomerProfile(phoneNo);
