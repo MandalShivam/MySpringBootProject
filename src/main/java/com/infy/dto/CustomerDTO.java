@@ -81,6 +81,7 @@ public class CustomerDTO {
     //Converts entity to dto
     public CustomerDTO customerEntityToDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setPhoneNo(customer.getPhoneNo());
         customerDTO.setName(customer.getName());
         customerDTO.setAge(customer.getAge());
         customerDTO.setAddress(customer.getAddress());
