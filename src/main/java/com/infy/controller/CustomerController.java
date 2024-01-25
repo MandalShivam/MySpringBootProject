@@ -42,6 +42,7 @@ public class CustomerController {
     @GetMapping("/customers/{phoneNo}/callDetails")
     public List<CallDetailsDTO> getCustomerCallDetails(@PathVariable  long phoneNo) {
         return customerService.getCustomerCallDetails(phoneNo);
+      //  gfhfhjgjh
     }
 
     @GetMapping("/customers/{phoneNo}/friends")
