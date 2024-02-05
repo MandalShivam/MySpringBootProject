@@ -6,6 +6,7 @@ import com.infy.dto.FriendFamilyDTO;
 import com.infy.dto.LoginDTO;
 import com.infy.exception.NoSuchCustomerException;
 import com.infy.service.CustomerService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/customers")
-    public String createCustomer(@RequestBody CustomerDTO customerDTO) {
+    public String createCustomer(@RequestBody @Valid CustomerDTO customerDTO) {
         customerService.createCustomer(customerDTO);
         return "Customer is created successfully";
     }

@@ -1,24 +1,33 @@
 package com.infy.dto;
 import com.infy.entity.Customer;
 import com.infy.entity.Plan;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
 public class CustomerDTO {
-    long phoneNo;
+    @Pattern(regexp = "[0-9]{10}", message="{customer.phoneNo.invalid}")
+    String phoneNo;
+    @NotNull
     String name;
+    @Min(1)
     int age;
-    char gender;
+    @Pattern(regexp = "[FfMm]",message = "{customer.gender.invalid}")
+    String gender;
+    @NotNull
     List<Long> friendAndFamily;
+    @NotNull
     String password;
+    @NotNull
     String address;
+    @NotNull
     PlanDTO currentPlan;
 
-    public long getPhoneNo() {
+    public String getPhoneNo() {
         return phoneNo;
     }
 
-    public void setPhoneNo(long phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 
@@ -38,11 +47,11 @@ public class CustomerDTO {
         this.age = age;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -84,7 +93,7 @@ public class CustomerDTO {
         customerDTO.setName(customer.getName());
         customerDTO.setAge(customer.getAge());
         customerDTO.setAddress(customer.getAddress());
-        customerDTO.setGender(customer.getGender());
+        customerDTO.setGender(Character.toString(customer.getGender()));
         PlanDTO planDTO =( new PlanDTO()).planEntityToDTO(customer.getPlan());
         customerDTO.setCurrentPlan(planDTO);
         return customerDTO;
@@ -93,12 +102,12 @@ public class CustomerDTO {
     //Convert dto to entity
     public Customer customerDtoToEntity(CustomerDTO customerDTO){
         Customer customer = new Customer();
-        customer.setPhoneNo(customerDTO.getPhoneNo());
+        customer.setPhoneNo(Long.parseLong(customerDTO.getPhoneNo()));
         customer.setName(customerDTO.getName());
         customer.setPassword(customerDTO.getPassword());
         customer.setAge(customerDTO.getAge());
         customer.setAddress(customerDTO.getAddress());
-        customer.setGender(customerDTO.getGender());
+        customer.setGender(customerDTO.getGender().charAt(0));
         Plan plan = (new PlanDTO()).planDTOToEntity(customerDTO.getCurrentPlan());
         customer.setPlan(plan);
         return customer;

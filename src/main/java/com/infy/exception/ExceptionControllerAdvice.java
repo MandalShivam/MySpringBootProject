@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -37,6 +39,17 @@ public class ExceptionControllerAdvice {
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining("'")));
+        return new ResponseEntity<>(errorMessage,HttpStatus.OK);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorMessage> exceptionHandler2(MethodArgumentNotValidException ex) {
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorMessage.setMessage(ex.getBindingResult().getAllErrors()
+                .stream()
+                .map(ObjectError::getDefaultMessage)
+                .collect(Collectors.joining(",")));
         return new ResponseEntity<>(errorMessage,HttpStatus.OK);
     }
 }
