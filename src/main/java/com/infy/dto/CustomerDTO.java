@@ -90,6 +90,7 @@ public class CustomerDTO {
     //Converts entity to dto
     public CustomerDTO customerEntityToDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setPhoneNo(customer.getPhoneNo());
         customerDTO.setName(customer.getName());
         customerDTO.setAge(customer.getAge());
         customerDTO.setAddress(customer.getAddress());
@@ -99,6 +100,7 @@ public class CustomerDTO {
         return customerDTO;
     }
 
+    //Checking branch
     //Convert dto to entity
     public Customer customerDtoToEntity(CustomerDTO customerDTO){
         Customer customer = new Customer();

@@ -35,6 +35,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{phoneNo}")
+    // to get the data of customer
     public CustomerDTO getCustomerProfile(@PathVariable("phoneNo") @Pattern(regexp = "[0-9]{10}",
             message="{customer.phoneNo.invalid}")  String phoneNo) throws NoSuchCustomerException {
         return (CustomerDTO) customerService.getCustomerProfile(phoneNo);
@@ -43,6 +44,7 @@ public class CustomerController {
     @GetMapping("/customers/{phoneNo}/callDetails")
     public List<CallDetailsDTO> getCustomerCallDetails(@PathVariable  long phoneNo) {
         return customerService.getCustomerCallDetails(phoneNo);
+      //  gfhfhjgjh
     }
 
     @GetMapping("/customers/{phoneNo}/friends")
